@@ -20,6 +20,7 @@ services:
     environment:
       - FTP_USER=user
       - FTP_PASS=pass
+      - PASV_ADDRESS=127.0.0.1
     ports:
       - "21:21"  # Открываем FTP порт
       - "30000-30010:30000-30010"  # Открываем пассивные порты для FTP
