@@ -1,0 +1,31 @@
+services:
+  web:
+    image: php:8.1-apache
+    volumes:
+      - ./www:/var/www/html  # Монтируем директорию сайта в контейнер
+    ports:
+      - "8081:80"  # Открываем порт 80 для веб-сервера
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    networks:
+      - site_network
+    depends_on:
+      - ftp
+
+  ftp:
+    image: fauria/vsftpd
+    volumes:
+      - ./www:/var/www/html  # Монтируем директорию сайта в контейнер
+      - ./config/vsftpd.conf:/etc/vsftpd.conf  # Монтируем кастомный конфигурационный файл
+    environment:
+      - FTP_USER=user
+      - FTP_PASS=pass
+    ports:
+      - "21:21"  # Открываем FTP порт
+      - "30000-30010:30000-30010"  # Открываем пассивные порты для FTP
+    networks:
+      - site_network
+
+networks:
+  site_network:
+    driver: bridge
