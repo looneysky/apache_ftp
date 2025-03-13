@@ -10,5 +10,5 @@ services:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     command: >
       bash -c "apt-get update && apt-get install -y apache2-utils ssl-cert &&
-               a2enmod proxy proxy_http proxy_https &&
+               a2enmod proxy proxy_http ssl &&
                apache2-foreground"
