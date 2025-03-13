@@ -9,6 +9,6 @@ services:
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     command: >
-      bash -c "apt-get update && apt-get install -y apache2-utils ssl-cert libapache2-mod-cache &&
-               a2enmod proxy proxy_http ssl cache headers ratelimit &&
+      bash -c "apt-get update && apt-get install -y apache2-utils ssl-cert &&
+               a2enmod proxy proxy_http ssl cache cache_disk headers ratelimit &&
                apache2-foreground"
